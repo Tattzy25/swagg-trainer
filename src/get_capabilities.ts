@@ -21,7 +21,7 @@ async function getCapabilities() {
       // Handle server-sent events
       if (!response.body) throw new Error('Response body is null');
       for await (const chunk of response.body) {
-        const text = new TextDecoder().decode(chunk instanceof Buffer ? new Uint8Array(chunk) : chunk)
+        const text = typeof chunk === 'string' ? chunk : new TextDecoder().decode(chunk instanceof Buffer ? new Uint8Array(chunk) : chunk)
         const lines = text.split('\n')
         for (const line of lines) {
           if (line.startsWith('data: ')) {
