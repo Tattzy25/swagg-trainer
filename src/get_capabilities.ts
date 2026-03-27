@@ -17,10 +17,11 @@ async function getCapabilities() {
       }),
     })
 
-    if (response.headers.get('content-type').includes('text/event-stream')) {
+    if (response.headers.get('content-type')?.includes('text/event-stream')) {
       // Handle server-sent events
+      if (!response.body) throw new Error('Response body is null');
       for await (const chunk of response.body) {
-        const text = new TextDecoder().decode(chunk)
+        const text = new TextDecoder().decode(chunk instanceof Buffer ? new Uint8Array(chunk) : chunk)
         const lines = text.split('\n')
         for (const line of lines) {
           if (line.startsWith('data: ')) {

@@ -251,7 +251,7 @@ server.tool(
     modelId: z.string().describe("ID of the trained model"),
   },
   async ({ prompt, modelId }: GenerateTattooImageRequest) => {
-    const response = await makeTatttyTrainerRequest(`${API_URL}/generate`, {
+    const response = await makeTatttyTrainerRequest<{ imageUrls: string[] }>(`${API_URL}/generate`, {
       method: "POST",
       body: JSON.stringify({ prompt, modelId }),
     });
@@ -388,7 +388,7 @@ server.tool(
   "Get API versions",
   {},
   async () => {
-    const response = await makeTatttyTrainerRequest(`${API_URL}/versions`);
+    const response = await makeTatttyTrainerRequest<{ versions: string[] }>(`${API_URL}/versions`);
 
     if (!response) {
       return { content: [{ type: "text", text: "Failed to retrieve API versions." }] };
