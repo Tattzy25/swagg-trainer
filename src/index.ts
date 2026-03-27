@@ -198,7 +198,7 @@ server.tool(
   "upload-images",
   "Upload zip folder of tattoo images with trigger word and model name",
   {
-    zipFile: z.instanceof(File).describe("Zip file containing tattoo images"),
+    zipFile: z.any().describe("Zip file containing tattoo images"),
     triggerWord: z.string().describe("Trigger word for the model"),
     modelName: z.string().describe("Name of the model to train"),
   },
