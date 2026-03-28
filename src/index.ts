@@ -112,7 +112,7 @@ app.listen(PORT, () => {
 });
 
 // Base URL for the TatttyTrainer API
-const API_URL = process.env.MCP_API_URL || "https://api.tatttytrainer.com";
+const API_URL = process.env.MCP_API_URL || "http:///swagg-trainer-production.up.railway.app/mcp";
 
 // Helper function for making API requests
 async function makeTatttyTrainerRequest<T>(url: string, options: RequestInit = {}): Promise<T | null> {
